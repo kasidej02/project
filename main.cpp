@@ -10,11 +10,15 @@
 using namespace std;
 int mymoney=0,gameover=0;
 int gamestart=0,howtoplay=0,leaderB=0;
+
+
 struct Card{
-	string deck;
+	string type;
 	string namecard;
 	int score;
 };
+
+
 int betmoney (int);
 
 void Addmoney(int,int &);
@@ -48,7 +52,7 @@ int main(){
 				char desk[100];
 				char name[100];
 				sscanf(ccard.c_str(),"%[^;];%[^;];%d",desk,name,&c.score);
-				c.deck = desk;
+				c.type = desk;
 				c.namecard = name;
 				cc.push_back(c);
 				//cout<< c.score << "\n";
@@ -152,11 +156,12 @@ void checkgamemode(int x){
 
 
 int Hit(vector<Card> &a,vector<string> &b){
-	int i = rand()%52;
+	int i = rand()%a.size();
 	//cout<< i <<"\n";
-	string x = a[i].deck ;
+	string x = a[i].type ;
 	string y = a[i].namecard;
 	int z = a[i].score;
 	b.push_back(x+y);
-	return a[i].score;	
+	a.erase(a.begin() + i);
+	return z;	
 }
