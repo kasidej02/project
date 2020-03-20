@@ -8,7 +8,7 @@
 #include<ctime>
 #include<cstdlib>
 using namespace std;
-int mymoney=0,gameover=0;
+int gameover=0;
 int gamestart=0,howtoplay=0,leaderB=0;
 
 
@@ -22,15 +22,16 @@ class unit{
 		string name;
 		string typeofp;
 		vector<string> onhand;
-		int money;				
+		int money;
+		int score;				
 	public:			
-		int betmoney(int);
-		void Addmoney(int);
-		void removemoney(int);
+		int betmoney(int); //ใส่เงินที่จะ bet
+		void Addmoney(int); //จำนวนเงินที่เพิ่ม
+		void removemoney(int);//จำนวนเงินที่ลด
 		bool checkgameover();
-		int Hit(vector<Card> &);
+		int Hit(vector<Card> &);//ใส่สำรับที่จะเอาการ์ดออกมา
 		void newTurn();
-		void create(string);
+		void create(string);//ใส่ hero หรือ bot
 };
 
 
@@ -54,13 +55,17 @@ int main(){
 	int menu=0;	
 	srand(time(0));
 	while (menu==0){
+		unit player,bot;
+		char player_action = '\0',monster_action = '\0';
+		player.create("Player");
+		bot.create("bot");
 		cout<<"Type 1 to start game"<<endl;
 		cout<<"Type 2 how to play the game"<<endl;
 		cout<<"Type 3 check leader board"<<endl;
 		int input_menu;
 		cin>>input_menu;
 		checkgamemode(input_menu);
-		unit player,bot;
+		
 
 		while(gamestart==1){
 		
@@ -84,6 +89,16 @@ int main(){
 
 			while(true){
 
+				player.newTurn();
+				bot.newTurn();
+				cout << "[H] Hit [S] Stand [E] Exit";
+				cout << "Enter your action: ";
+				cin >> player_action;
+				player_action = toupper(player_action);
+				if(player_action == 'E'){
+					//ไปร้านค้า
+					//ไปstory
+				} 
 
 
 
@@ -92,12 +107,14 @@ int main(){
 
 
 
-				if(checkgameover ()){
+
+
+				/*if(checkgameover ()){
 
 					//ใส่ฟังก์ชันแสดงฉากเกม over ตรงนี้
 
 					break; 
-				}
+				}*/
 
 			}
 		
@@ -149,7 +166,7 @@ int main(){
 
 
 int unit::betmoney(int x){ //x cin from player
-	if(x>mymoney) return 0;
+	if(x>money) return 0;
 	else return x;
 	
 }
@@ -200,6 +217,7 @@ int unit::Hit(vector<Card> &a){
 
 void unit::newTurn(){
 	onhand.clear();
+	score = 0;
 }
 
 
