@@ -54,14 +54,32 @@ void create(string);
 int main(){
 	int menu=0;	
 	srand(time(0));
+    cout<<"--------------------------------------------\n";
+    cout<<setw(35)<<"I N F O M A T I O N S\n";
+    cout<<"--------------------------------------------\n";
+    cout<<"        Welcome to the 'Pirate's Sea'.\n        and you are one of pirates.\n";
+    cout<<"        Because fighting on the sea \n";
+    cout<<"         is the most important. \n";
+    cout<<"          Hence you must protect\n";
+    cout<<"          your ship from others. \n";
+    cout<<"--------------------------------------------\n";
+    for(int i=0;i<3;i++){
+        cout<<endl;
+    }
+    cout<<"--------------------------------------------\n";
+    cout<<setw(35)<<"W A R N I N G ! ! ! \n";
+    cout<<"--------------------------------------------\n";
+    cout<<"        Now doubt ship is coming.\n";
+    cout<<"   Becareful and prepare for fighting \n";
+	cout<<"--------------------------------------------\n";
 	while (menu==0){
 		unit player,bot;
 		char player_action = '\0',monster_action = '\0';
 		player.create("Player");
 		bot.create("bot");
-		cout<<"Type 1 to start game"<<endl;
-		cout<<"Type 2 how to play the game"<<endl;
-		cout<<"Type 3 check leader board"<<endl;
+		cout<<"Type [1] to start game"<<endl;
+		cout<<"Type [2] how to play the game"<<endl;
+		cout<<"Type [3] check leader board"<<endl;
 		int input_menu;
 		cin>>input_menu;
 		checkgamemode(input_menu);
