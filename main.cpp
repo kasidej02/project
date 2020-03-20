@@ -18,16 +18,31 @@ struct Card{
 	int score;
 };
 
+class unit{
+		string name;
+		string typeofp;
+		vector<string> onhand;
+		int money;				
+	public:			
+		int betmoney(int);
+		void Addmoney(int);
+		void removemoney(int);
+		bool checkgameover();
+		int Hit(vector<Card> &);
+};
 
-int betmoney (int);
 
-void Addmoney(int,int &);
+int betmoney(int);
 
-void removemoney(int,int &);
+void Addmoney(int);
 
-void checkmoney ();
+void removemoney(int);
+
+bool checkgameover();
 
 void checkgamemode(int);
+
+int Hit(vector<Card> &);
 
 int main(){
 	int menu=0;	
@@ -59,7 +74,33 @@ int main(){
 			}
 			int i=rand()%52;
 			cout<<cc[i].score<<endl;
-			break;
+			
+
+
+			while(true){
+
+
+
+
+
+
+
+
+
+				if(checkgameover ()){
+
+					//ใส่ฟังก์ชันแสดงฉากเกม over ตรงนี้
+
+					break; 
+				}
+
+			}
+		
+
+
+
+
+
 			
 			
 			
@@ -116,7 +157,7 @@ int main(){
 	
 	
 }
-int betmoney (int x){ //x cin from player
+int unit::betmoney(int x){ //x cin from player
 	if(x>mymoney) return 0;
 	else return x;
 	
@@ -124,22 +165,23 @@ int betmoney (int x){ //x cin from player
 
 
 
-void Addmoney(int x,int &y){ //x from function bet.,y = mymoney
-	y += x*2;
+void unit::Addmoney(int x){ //x from function bet.
+	money += x*2;
 }
 
 
 
 
-void removemoney(int x,int &y){ //x from function bet.,y = mymoney
-	y -= x;
+void unit::removemoney(int x){ //x from function bet.
+	money -= x;
 }
 
 
 
 
-void checkmoney (){
-	if(mymoney<=0) gameover=1;
+bool unit::checkgameover (){
+	if(money<=0) return true;
+	else return false;
 }
 
 
@@ -155,13 +197,12 @@ void checkgamemode(int x){
 
 
 
-int Hit(vector<Card> &a,vector<string> &b){
+int unit::Hit(vector<Card> &a){
 	int i = rand()%a.size();
-	//cout<< i <<"\n";
 	string x = a[i].type ;
 	string y = a[i].namecard;
 	int z = a[i].score;
-	b.push_back(x+y);
+	onhand.push_back(x+y);
 	a.erase(a.begin() + i);
 	return z;	
 }
