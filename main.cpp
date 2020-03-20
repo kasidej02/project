@@ -29,6 +29,8 @@ class unit{
 		void removemoney(int);
 		bool checkgameover();
 		int Hit(vector<Card> &);
+		void newTurn();
+		void create(string);
 };
 
 
@@ -44,6 +46,10 @@ void checkgamemode(int);
 
 int Hit(vector<Card> &);
 
+void newTurn();
+
+void create(string);
+
 int main(){
 	int menu=0;	
 	srand(time(0));
@@ -54,6 +60,8 @@ int main(){
 		int input_menu;
 		cin>>input_menu;
 		checkgamemode(input_menu);
+		unit player,bot;
+
 		while(gamestart==1){
 		
 			vector<Card> cc;
@@ -70,10 +78,7 @@ int main(){
 				c.type = desk;
 				c.namecard = name;
 				cc.push_back(c);
-				//cout<< c.score << "\n";
 			}
-			int i=rand()%52;
-			cout<<cc[i].score<<endl;
 			
 
 
@@ -138,25 +143,11 @@ int main(){
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
+
+
+
 int unit::betmoney(int x){ //x cin from player
 	if(x>mymoney) return 0;
 	else return x;
@@ -205,4 +196,23 @@ int unit::Hit(vector<Card> &a){
 	onhand.push_back(x+y);
 	a.erase(a.begin() + i);
 	return z;	
+}
+
+void unit::newTurn(){
+	onhand.clear();
+}
+
+
+
+
+
+void unit::create(string t){
+		if(t == "Player"){
+			cout << "Please input your name: ";
+			getline(cin,name);
+			money = 500;
+		}else if(t == "bot"){
+			name = "more money";
+
+		}
 }
